@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - {{ participant.getNom() }} Details
+{% endblock %}
+
+{% block body %}
+    <h1>{{ participant.getNom() }}</h1>
+    <p>Email: {{ participant.getEmail() }}</p>
+    <p>Subscribe: {% if participant.isIsSubscribe() %}Yes{% else %}No{% endif %}</p>
+    <p>Fonction: {{ participant.getFonction() }}</p>
+    <p>Formation: {{ participant.getFormation().getTitre() }}</p>
+{% endblock %}

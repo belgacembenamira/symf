@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <h2>
+    Liste des formations | <small><a href="{{ path('Ajouter') }}">Ajouter</a></small>
+  </h2>
+  {% for msg in app.flashes('notice') %}
+    {{ msg }}
+  {% endfor %}
+  {{ form_start(form) }}
+  {{ form_widget(form) }}
+  {{ form_end(form) }}
+  <table class="table table-hover table-striped" border="1">
+    <thead>
+      <tr>
+        <th>
+          ID
+        </th>
+        <th>
+          Titre
+        </th>
+        <th>
+          Prix
+        </th>
+        <th>
+          Durée
+        </th>
+        <th>
+          Date de début
+        </th>
+        <th>
+          Image
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for formation in lesFormations %}
+        <tr>
+          <td>
+            {{ formation.id }}
+          </td>
+          <td>
+            {{ formation.titre }}
+          </td>
+          <td>
+            {{ formation.price }}
+          </td>
+          <td>
+            {{ formation.duree }}
+          </td>
+          <td>
+            {{ formation.beginAt|date('d-m-Y') }}
+          </td>
+          <td>
+            <img src="{{ asset(formation.image) }}" />
+          </td>
+
+          <td>
+            <a class="btn btn-primary" href="{{ path('Ajouter') }}">Ajouter</a>
+            <a class="btn btn-danger"
+              href="{{
+              path(
+                'formation_delete',
+                {
+                  id: formation.id
+                }
+              )
+              }}"
+              onclick="return confirm('Are you sure you want to delete {{
+              formation.titre
+              }}')">
+              Supprimer
+            </a>
+            <a class="btn btn-primary"
+              href="{{
+              path(
+                'edit_formation',
+                {
+                  id: formation.id
+                }
+              )
+              }}">
+              Modifier
+            </a>
+            <a class="btn btn-primary" href="{{ path('Formation_show', {'id': formation.id}) }}">Voir</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

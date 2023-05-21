@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h2>Ajouter un participant</h2>
+
+  {{ form_start(form) }}
+  {{ form_row(form.nom, {'label': 'Nom'}) }}
+  {{ form_row(form.email, {'label': 'Email'}) }}
+  {{ form_row(form.is_subscribe, {'label': 'Abonné'}) }}
+  {{ form_row(form.fonction, {'label': 'Fonction'}) }}
+  {{ form_row(form.Formation, {'label': 'Formation'}) }}
+  {{ form_row(form.Valider, {'label': 'Valider'}) }}
+  {{ form_end(form) }}
+{% endblock %}

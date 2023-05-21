@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+  {{ parent() }} - Edit
+{% endblock %}
+{% block titre %}
+  {{ parent()|upper }} - consultation de {{ formation.titre() }}
+{% endblock %}
+{% block body %}
+  <h1>
+    Prixe {{ formation.getPrice() }}
+  </h1><br />
+  <h1>
+    {# {{ formation.get() }} #}
+  </h1>
+  <h2>
+    Date d'expiration: {{ formation.getBeginAt()|date('d-m-Y') }}
+  </h2>
+
+ 
+    Formations
+  </h3>
+
+  <ul class="nav nav-pills nav-stacked">
+    {% for formation in lesformations %}
+      <h4>
+        formation
+      </h4>
+      <li> titre :{{ formation.titre }}</li>
+      <li> duree :{{ formation.duree }}</li>
+      <li>beginAt : {{ formation.beginAt|date('d-m-Y') }}</li><br />
+      <li>price :{{ formation.price }}</li><br />
+    {% endfor %}
+  </ul>
+{% endblock %}
