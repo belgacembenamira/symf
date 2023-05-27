@@ -1,116 +1,131 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <h2>
-    Liste des Participants | <small><a href="{{ path('AjouterParticipant') }}">
-        Ajouter
-      </a></small>
-  </h2>
-  {% for msg in app.flashes('notice') %}
-    {{ msg }}
-  {% endfor %}
-  {{ form_start(form) }}
-  {{ form_widget(form) }}
-  {{ form_end(form) }}
-  <table class="table table-hover table-striped" border="1">
-    <thead>
-      <tr>
-        <th>
-          ID
-        </th>
-        <th>
-          Nom
-        </th>
-        <th>
-          Email
-        </th>
-        <th>
-          Abonné
-        </th>
-        <th>
-          Fonction
-        </th>
-        <th>
-          Formation
-        </th>
-        <th>
-          Actions
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for participant in lesParticipants %}
-        <tr>
-          <td>
-            {{ participant.id }}
-          </td>
-          <td>
-            {{ participant.nom }}
-          </td>
-          <td>
-            {{ participant.email }}
-          </td>
-          <td>
-            {% if participant.isSubscribe %}
-              Oui
-            {% else %}
-              Non
-            {% endif %}
-          </td>
-          <td>
-            {{ participant.fonction }}
-          </td>
-          <td>
-            {% if participant.Formation %}
-              {{ participant.Formation.titre }}
-            {% else %}
-              -
-            {% endif %}
-          </td>
-          <td>
-            <a class="btn btn-primary" href="{{ path('AjouterParticipant') }}">
-              Ajouter
-            </a>
-            <a class="btn btn-danger"
-              href="{{
-              path(
-                'participant_delete',
-                {
-                  id: participant.id
-                }
-              )
-              }}"
-              onclick="return confirm('Are you sure you want to delete {{
-              participant.nom
-              }} ?')">
-              Supprimer
-            </a>
-            <a class="btn btn-primary"
-              href="{{
-              path(
-                'edit_participant',
-                {
-                  id: participant.id
-                }
-              )
-              }}">
-              Modifier
-            </a>
+  <div class="container">
+    <h2>
+      Liste des Participants | <small><a class="btn btn-primary"
+          href="{{ path('AjouterParticipant') }}">
+          Ajouter
+        </a></small>
+    </h2>
 
-            <a class="btn btn-primary"
-              href="{{
-              path(
-                'participant_show',
-                {
-                  id: participant.id
-                }
-              )
-              }}">
-              Voir
-            </a>
-          </td>
+    {% for msg in app.flashes('notice') %}
+      <div class="alert alert-info">
+        {{ msg }}
+      </div>
+    {% endfor %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <table class="table table-hover table-striped p-5 m-5"
+      style="width: 100%; height: 100%;"
+      border="1">
+      <thead>
+        <tr>
+          <th>
+            ID
+          </th>
+          <th>
+            Nom
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Abonné
+          </th>
+          <th>
+            Fonction
+          </th>
+          <th>
+            Formation
+          </th>
+          <th>
+            Actions
+          </th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {% for participant in lesParticipants %}
+          <tr>
+            <td>
+              {{ participant.id }}
+            </td>
+            <td>
+              {{ participant.nom }}
+            </td>
+            <td>
+              {{ participant.email }}
+            </td>
+            <td>
+              {% if participant.isSubscribe %}
+                Oui
+              {% else %}
+                Non
+              {% endif %}
+            </td>
+            <td>
+              {{ participant.fonction }}
+            </td>
+            <td>
+              {% if participant.Formation %}
+                {{ participant.Formation.titre }}
+              {% else %}
+                -
+              {% endif %}
+            </td>
+            <td>
+              <a class="btn btn-success"
+                href="{{ path('AjouterParticipant') }}">
+                Ajouter
+              </a>
+              <a class="btn btn-danger"
+                href="{{
+                path(
+                  'participant_delete',
+                  {
+                    id: participant.id
+                  }
+                )
+                }}"
+                onclick="return confirm('Are you sure you want to delete {{
+                participant.nom
+                }}?')">
+                Supprimer
+              </a>
+              <a class="btn btn-warning"
+                href="{{
+                path(
+                  'edit_participant',
+                  {
+                    id: participant.id
+                  }
+                )
+                }}">
+                Modifier
+              </a>
+              <a class="btn btn-info"
+                href="{{
+                path(
+                  'participant_show',
+                  {
+                    id: participant.id
+                  }
+                )
+                }}">
+                Voir
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="text-center">
+  <a href="{{ path('home') }}" class="btn btn-primary">Retour à la page d'Acuiel</a>
+</div>
+
+  </div>
+  
 {% endblock %}

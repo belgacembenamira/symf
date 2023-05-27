@@ -1,15 +1,25 @@
 {% extends 'base.html.twig' %}
+
 {% block body %}
-  <h2>
-    Liste des formations | <small><a href="{{ path('Ajouter') }}">Ajouter</a></small>
-  </h2>
+  <div class="container">
+    <h2>
+      Liste des formations <small><a href="{{ path('Ajouter') }}"
+          class="btn btn-primary">
+          Ajouter
+        </a></small>
+    </h2>
+  </div>
   {% for msg in app.flashes('notice') %}
-    {{ msg }}
+    <div class="alert alert-info">
+      {{ msg }}
+    </div>
   {% endfor %}
+
   {{ form_start(form) }}
   {{ form_widget(form) }}
   {{ form_end(form) }}
-  <table class="table table-hover table-striped" border="1">
+
+  <table class="table table-hover table-striped w-100 h-100 m-5 p-5" border="1">
     <thead>
       <tr>
         <th>
@@ -27,8 +37,11 @@
         <th>
           Date de début
         </th>
-        <th>
+        {# <th>
           Image
+        </th> #}
+        <th>
+          Actions
         </th>
       </tr>
     </thead>
@@ -50,10 +63,9 @@
           <td>
             {{ formation.beginAt|date('d-m-Y') }}
           </td>
-          <td>
+          {# <td>
             <img src="{{ asset(formation.image) }}" />
-          </td>
-
+          </td> #}
           <td>
             <a class="btn btn-primary" href="{{ path('Ajouter') }}">Ajouter</a>
             <a class="btn btn-danger"
@@ -70,7 +82,7 @@
               }}')">
               Supprimer
             </a>
-            <a class="btn btn-primary"
+            <a class="btn btn-warning"
               href="{{
               path(
                 'edit_formation',
@@ -81,10 +93,24 @@
               }}">
               Modifier
             </a>
-            <a class="btn btn-primary" href="{{ path('Formation_show', {'id': formation.id}) }}">Voir</a>
+            <a class="btn btn-info"
+              href="{{
+              path(
+                'Formation_show',
+                {
+                  id: formation.id
+                }
+              )
+              }}">
+              Voir
+            </a>
           </td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+<div class="text-center">
+  <a href="{{ path('home') }}" class="btn btn-primary">Retour à la page d'accueil</a>
+</div>
+
 {% endblock %}

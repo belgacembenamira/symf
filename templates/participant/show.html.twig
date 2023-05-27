@@ -1,13 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ parent() }} - {{ participant.getNom() }} Details
+  {{ parent() }} - {{ participant.getNom() }} Details
 {% endblock %}
 
 {% block body %}
-    <h1>{{ participant.getNom() }}</h1>
-    <p>Email: {{ participant.getEmail() }}</p>
-    <p>Subscribe: {% if participant.isIsSubscribe() %}Yes{% else %}No{% endif %}</p>
-    <p>Fonction: {{ participant.getFonction() }}</p>
-    <p>Formation: {{ participant.getFormation().getTitre() }}</p>
+  <h1> Nom :
+    {{ participant.getNom() }}
+  </h1>
+  <h1>
+    Email: {{ participant.getEmail() }}
+  </h1>
+  <h1>
+    Subscribe:{% if participant.isIsSubscribe() %}
+      Yes
+    {% else %}
+      No
+    {% endif %}
+  </h1>
+  <h1>
+    Fonction: {{ participant.getFonction() }}
+  </h1>
+  <h1>
+    Formation: {{ participant.getFormation().getTitre() }}
+  </h1>
+
+  <a href="{{ path('liste_participant') }}" class="btn btn-primary">
+    Retour à la liste des participants
+  </a>
 {% endblock %}

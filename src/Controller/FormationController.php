@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Formation;
+use App\Entity\Image;
 use App\Entity\Participant;
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,7 +54,12 @@ class FormationController extends AbstractController
         $Formation->setduree("30");
         $Formation->setPrice("2.00");
         $Formation->setBeginAt(new \DateTimeImmutable());
-        $Formation->setImage("https://www.google.com/imgres?imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D8965533020139012&tbnid=765I0uiCvxXx6M&vet=12ahUKEwjL3oC85vD-AhUMMuwKHa9BAGcQMygBegUIARClAQ..i&imgrefurl=https%3A%2F%2Fwww.facebook.com%2FCFP.forma.plus%2Fposts%2F8965533083472339%2F&docid=YDBFzZfZbp7duM&w=1200&h=722&itg=1&q=formation%20mern&ved=2ahUKEwjL3oC85vD-AhUMMuwKHa9BAGcQMygBegUIARClAQ");
+        // Assuming you have already instantiated the $Formation object
+
+        // $image = new Image();
+        // $image->setUrl("https://i.ytimg.com/vi/dapS3HkX3Wc/maxresdefault.jpg");
+        // $image->setAlt("formation");
+
 
         //Ajout de PArticipant 
         $Participant1 = new Participant();
@@ -140,6 +147,7 @@ class FormationController extends AbstractController
     /**
      * @Route("/Ajouter", name="Ajouter")
      */
+
     public function ajouter(Request $request)
     {
         $formation = new Formation();
@@ -149,7 +157,7 @@ class FormationController extends AbstractController
             ->add('begin_at', DateType::class)
             ->add('price', NumberType::class)
             ->add('duree', IntegerType::class)
-            ->add('Image', FileType::class)
+            // ->add('Image', FileType::class)
             ->add('Valider', SubmitType::class)
             ->getForm();
 
@@ -159,6 +167,9 @@ class FormationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($formation);
             $em->flush();
+
+            // Redirection vers la page d'accueil
+            return new RedirectResponse($this->generateUrl('home'));
         }
 
         return $this->render(
@@ -166,6 +177,7 @@ class FormationController extends AbstractController
             ['form' => $form->createView()]
         );
     }
+
 
     //     /**
     //  * @Route("/Ajouter_formation", name="Ajouter_job")
@@ -245,10 +257,10 @@ class FormationController extends AbstractController
             ->add('price', MoneyType::class)
             ->add('duree', IntegerType::class)
             ->add('begin_at', DateType::class)
-            ->add('Image', FileType::class, [
-                'required' => false,
-                'data_class' => null,
-            ])
+            // ->add('Image', FileType::class, [
+            //     'required' => false,
+            //     'data_class' => null,
+            // ])
             ->add('save', SubmitType::class, ['label' => 'Update Formation'])
             ->getForm();
 

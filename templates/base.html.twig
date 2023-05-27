@@ -1,37 +1,116 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
 
-        <title>{% block title %}Formation {% endblock %}</title>
-        
-        {% block stylesheets %}
-        
-        <link rel="stylesheet"
+    <title>
+      {% block title %}
+        Formation
+      {% endblock %}
+    </title>
+
+    {% block stylesheets %}
+      <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"crossorigin="anonymous"/>
-        <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}" />  
-        {% endblock %}
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous" />
+      <link rel="stylesheet"
+        type="text/css"
+        href="{{ asset('css/app.css') }}" />
+      <style>
+        .custom-navbar { background-color: #337ab7; /* Couleur de la navbar */
+        /* Autres styles de la navbar */ }
 
-        {% block javascripts %}
-          
+        .custom-footer { background-color: #f8f8f8; /* Couleur du footer */ /*
+        Autres styles du footer */ }
+
+        .custom-heading { margin-top: 50px; /* Marge supérieure pour le titre */
+        }
+
+        .custom-link { color: #337ab7; /* Couleur des liens */ }
+      </style>
+    {% endblock %}
+
+    {% block javascripts %}
+
+    {% endblock %}
+  </head>
+  <body>
+   <nav class="navbar bg-info " style="width: 100%; height: 80px;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ path('home') }}">Projet</a>
+    <ul class="nav navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('liste_formation') }}">
+          Liste des formations
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" href="{{ path('Ajouter') }}">
+          Ajouter formation
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('liste_participant') }}">
+          Liste des participants
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" href="{{ path('AjouterParticipant') }}">
+          Ajouter participant
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+    {% block content %}
+      <div class="container">
+        <h1 class="text-center custom-heading">
+          {% block titre %}
+            Projet
+          {% endblock %}
+        </h1>
+        {% block body %}
+
         {% endblock %}
-    </head>
-    <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ path('home') }}">Projet </a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ path('liste_formation') }}">list formation</a></li>
-                    <li><a href="{{ path('liste_participant') }}">list participant</a></li> 
-                </ul>
-               
-            </div>
-        </nav>
-        <h1 class="text-center">{% block titre%} Projet {% endblock %}</h1>
-        {# <a href="{{path('security_logout')}}">sign out</a> #}
-        {% block body %}{% endblock %}
-        </body>
-    </html>
+      </div>
+    {% endblock %}
+
+    <footer class="navbar navbar-inverse navbar-fixed-bottom custom-footer navbar navbar-light"
+      style="background-color: #333; width: 100%; height: 80px;">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="{{ path('home') }}" class="custom-link">
+              <i class="fas fa-home"></i> Home
+            </a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="{{ path('liste_formation') }}" class="custom-link">
+              <i class="fas fa-list"></i> Liste des formations
+            </a>
+          </li>
+          <li>
+            <a class="custom-link" href="{{ path('Ajouter') }}">
+              Ajouter formation
+            </a>
+          </li>
+          <li>
+            <a href="{{ path('liste_participant') }}" class="custom-link">
+              <i class="fas fa-users"></i> Liste des participants
+            </a>
+          </li>
+          <li>
+            <a class="nav-link" href="{{ path('AjouterParticipant') }}">
+              Ajouter participant
+            </a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
