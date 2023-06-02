@@ -5,27 +5,45 @@
 {% endblock %}
 
 {% block body %}
-  <h1> Nom :
-    {{ participant.getNom() }}
-  </h1>
-  <h1>
-    Email: {{ participant.getEmail() }}
-  </h1>
-  <h1>
-    Subscribe:{% if participant.isIsSubscribe() %}
-      Yes
-    {% else %}
-      No
-    {% endif %}
-  </h1>
-  <h1>
-    Fonction: {{ participant.getFonction() }}
-  </h1>
-  <h1>
-    Formation: {{ participant.getFormation().getTitre() }}
-  </h1>
+  <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th scope="row">Nom</th>
+                <td>{{ participant.getNom() }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Email</th>
+                <td>{{ participant.getEmail() }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Subscribe</th>
+                <td>{% if participant.isIsSubscribe() %}Yes{% else %}No{% endif %}</td>
+              </tr>
+              <tr>
+                <th scope="row">Fonction</th>
+                <td>{{ participant.getFonction() }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Formation</th>
+                <td>{{ participant.getFormation().getTitre() }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <a href="{{ path('liste_participant') }}" class="btn btn-primary">
-    Retour à la liste des participants
-  </a>
+  <div class="row mt-3">
+    <div class="col-md-6 offset-md-3 text-center">
+      <a href="{{ path('liste_participant') }}" class="btn btn-primary">Retour à la liste des participants</a>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
